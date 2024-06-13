@@ -12,25 +12,13 @@ using System.Configuration;
 
 namespace MyBudgetV1_0.Forms
 {
-    public static class DateTimeMethods
-    {
-        public static DateTime StartOfMonth(this DateTime date)
-        {
-            return new DateTime(date.Year, date.Month, 1, 0, 0, 0);
-        }
-
-        public static DateTime EndOfMonth(this DateTime date)
-        {
-            return date.StartOfMonth().AddMonths(1).AddSeconds(-1);
-        }
-    }
     public partial class frmAccountPayments : Form
     {
         int accountBalanceID = 0;
         int accountPaymentID = 0;
         static DateTime CurrentDate = DateTime.Today;
-        DateTime FilterRangeFrom = CurrentDate.StartOfMonth();
-        DateTime FilterRangeTo = CurrentDate.EndOfMonth();
+        static DateTime FilterRangeFrom = new DateTime(CurrentDate.Year, CurrentDate.Month, 1);
+        static DateTime FilterRangeTo = FilterRangeFrom.AddMonths(1).AddDays(-1);
         DataTable dtPayments;
         
         public frmAccountPayments()
